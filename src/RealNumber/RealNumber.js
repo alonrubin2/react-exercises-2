@@ -1,7 +1,22 @@
 import React from 'react';
 import './RealNumber.scss';
+import {useState} from 'react';
 
 function RealNumber() {
+	const reg = new RegExp('^[0-9]+$');
+	const [isShown, setShown] = useState(true);
+	const [value, setValue] = useState('');
+
+	function isValid(event) {
+		setValue(event.target.value);
+		if (reg.test(event.target.value)) {
+			setShown(true);
+		}
+		else {
+			setShown(false);
+		}
+	}
+
 	return (
 		<div className="RealNumber">
 			<p>
@@ -11,8 +26,9 @@ function RealNumber() {
 				"A13" - <span className="value--invalid">invalid</span>
 			</p>
 
-			<input type="text" className="text-box" />
-			<button>Submit</button>
+			<input  value={value} type="text" className="text-box" 
+			onChange={isValid} />
+			{isShown && <button>Submit</button>}
 		</div>
 	)
 }

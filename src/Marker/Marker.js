@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import MarkableItem from './MarkableItem/MarkableItem';
 import './Marker.scss';
+
 
 function Marker() {
 
@@ -9,6 +11,15 @@ function Marker() {
 		"Third item",
 		"Fourth special item",
 	]);
+	const [value, setValue] = useState('');
+
+
+
+
+	
+
+
+
 
 	return (
 		<div className="Marker">
@@ -19,9 +30,11 @@ function Marker() {
 				Apply the marker for <u>all items</u>.
 			</p>
 
-			<input type="text" placeholder="Text to marker..." />
+			<input  value={value} type="text" placeholder="Text to marker..." onChange={(e) => setValue(e.target.value)} />
 			<ul>
-				{ /* The list should be here */ }
+				
+					<MarkableItem words={items} doesInclude={value} />
+			
 			</ul>
 		</div>
 	)
